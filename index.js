@@ -11,7 +11,7 @@ var num;
 var url = 'mongodb://ec2-54-211-134-229.compute-1.amazonaws.com/penn_db';
 var Message;
 var collection;
-app.get('/read/?time=', function (req, res) {
+app.get('/read/', function (req, res) {
     num = (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);

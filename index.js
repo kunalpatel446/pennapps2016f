@@ -7,8 +7,8 @@ var db = MongoClient.connect("penn_db");
 //get random from 1 to 100000
 //return "num : {x,y}" from mongo
 
-var num =  Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001;
-var url = 'mongodb://ec2-54-211-134-229.compute-1.amazonaws.com';
+var num =  (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString();
+var url = 'mongodb://ec2-54-211-134-229.compute-1.amazonaws.com/penn_db';
 
 MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
@@ -16,7 +16,7 @@ MongoClient.connect(url, function(err, db) {
     var findDocuments = function(db, callback) {
 	// Get the documents collection
 	var collection = db.collection('bal1');
-	collection.find({'_id': 1003}).toArray(function(err, docs) {
+	collection.find({'_id': num}).toArray(function(err, docs) {
 	    assert.equal(err, null);
 	    console.log("Found the following records");
 	    console.log(docs);
@@ -40,9 +40,9 @@ app.get('/update', function (req, res) {
     res.send('Hello World');
 })
 
-var server = app.listen(8081, function (err,db) {
+var server = app.listen(8081, function (err) {
+    assert.equal(err,null);
     var host = server.address().address
     var port = server.address().port
-	assert.equal(err, null);
     console.log("Example app listening at http://%s:%s", host, port)
 })

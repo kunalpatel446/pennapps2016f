@@ -10,14 +10,15 @@ var db = MongoClient.connect("penn_db");
 var num;
 var url = 'mongodb://ec2-54-211-134-229.compute-1.amazonaws.com/penn_db';
 var Message;
+var collection;
 app.get('/read', function (req, res) {
-    num =  (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()
+    num = (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
-        console.log ("Connection successful");
+        console.log("Connection successful");
         var findDocuments = function(db, callback) {
     	// Get the documents collection
-    	var collection = db.collection('bal1');
+    	collection = db.collection('bal1');
     	collection.find({'_id': num}).toArray(function(err, docs) {
     	    assert.equal(err, null);
     	    console.log("Found the following records");
@@ -37,21 +38,22 @@ app.get('/read', function (req, res) {
 //get value of x and y from mongo
 //hash the values and update mongo
 //return new values without a read to mongo
-app.get('/update', function(db, callback) {
+app.get('/update', function(req, res) {
     num = (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
-        console.log ("Connection successful");
+        console.log("Connection successful");
         var updateDocuments = function(db, callback) {
         // Get the documents collection
-        var collection = db.collection('bal1');
-        collection.update({'_id': num}, {$set: {'_id': (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()}}, function(err, result){
-            assert.equal(1, result.result.n);
-            console.log("Found the following records");
-            console.log(docs);
-            Message = docs;
-            callback(result);
-        });
+            collection = db.collection('bal1');
+            collection.update({'_id': num}, { $set: {'_id' : (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()}}, function(err, docs){
+                assert.equal(err, null);
+                assert.equal(1, docs.result.n);
+                console.log("Found the following records");
+                console.log(docs);
+                Message = docs;
+                callback(docs);
+            });
         }
         updateDocuments(db,function(){
         db.close();

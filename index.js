@@ -26,14 +26,14 @@ app.get('/read', function (req, res) {
     	    console.log(docs);
             Message = docs;
     	    callback(docs);
+            res.send("helloder");
+            //res.send(req.params.time);
     	});
         }
         findDocuments(db,function(){
     	   db.close();
         });
     });
-    res.send("helloder");
-  res.send(req.params.time);
 })
 
 //get random from 1 to 100000

@@ -11,6 +11,18 @@ var num;
 var url = 'mongodb://ec2-54-211-134-229.compute-1.amazonaws.com/penn_db';
 var Message;
 var collection;
+var prometheus = require("prometheus-wrapper");
+prometheus.setNamespace("myapp");
+
+app.get('/metrics', function(req, res) {
+    res.end(prometheus.getMetrics());
+});
+
+prometheus.createSummary("mysummary", "Compute quantiles and median of a random list of numbers.", {
+    percentiles: [ 0.99 ]
+});
+
+
 app.get('/read/', function (req, res) {
     num = (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()
     MongoClient.connect(url, function(err, db) {

@@ -57,7 +57,7 @@ app.get('/update', function (db, callback) {
         db.close(); 
         });
     });
-  res.send(Message);
+  callback.send(Message);
 })
 
 var server = app.listen(8081, function (err) {

@@ -37,8 +37,8 @@ app.get('/read', function (req, res) {
 //get value of x and y from mongo
 //hash the values and update mongo
 //return new values without a read to mongo
-app.get('/update', function (db, callback) {
-    num = (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString();
+app.get('/update', function(db, callback) {
+    num = (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
         console.log ("Connection successful");

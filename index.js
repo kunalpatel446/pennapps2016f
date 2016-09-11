@@ -8,7 +8,7 @@ var db = MongoClient.connect("penn_db");
 //return "num : {x,y}" from mongo
 
 var num =  Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001;
-var url = 'mongodb://localhost:27017/penn_db';
+var url = 'mongodb://ec2-54-211-134-229.compute-1.amazonaws.com';
 
 MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
@@ -24,7 +24,7 @@ MongoClient.connect(url, function(err, db) {
 	});
     }
     findDocuments(db,function(){
-	db.close();
+	db.close();cd 
     });
 });
 

@@ -26,8 +26,8 @@ app.get('/read', function (req, res) {
     	    console.log(docs);
             Message = docs;
     	    callback(docs);
-            res.send("helloder");
-            //res.send(req.params.time);
+            //res.send("helloder");
+            res.send(req.params.time);
     	});
         }
         findDocuments(db,function(){

@@ -12,11 +12,11 @@ var url = 'mongodb://ec2-54-211-134-229.compute-1.amazonaws.com';
 
 MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
-    console.log ("Connection successful");
+    console.log ("COnnection successful");
     var findDocuments = function(db, callback) {
 	// Get the documents collection
 	var collection = db.collection('bal1');
-	collection.find().toArray(function(err, docs) {
+	collection.find({'_id': 1003}).toArray(function(err, docs) {
 	    assert.equal(err, null);
 	    console.log("Found the following records");
 	    console.log(docs);
@@ -24,7 +24,7 @@ MongoClient.connect(url, function(err, db) {
 	});
     }
     findDocuments(db,function(){
-	db.close();
+	db.close(); 
     });
 });
 
@@ -40,9 +40,9 @@ app.get('/update', function (req, res) {
     res.send('Hello World');
 })
 
-var server = app.listen(8081, function () {
+var server = app.listen(8081, function (err,db) {
     var host = server.address().address
     var port = server.address().port
-
+	assert.equal(err, null);
     console.log("Example app listening at http://%s:%s", host, port)
 })

@@ -21,12 +21,12 @@ app.get('/read/', function (req, res) {
     	collection = db.collection('bal1');
     	collection.find({'_id': num}).toArray(function(err, docs) {
     	    assert.equal(err, null);
-    	    console.log("Found the following records");
-    	    console.log(req.query.time);
+    	    //console.log("Found the following records");
+    	    //console.log(req.query.time);
             Message = docs;
     	    callback(docs);
             //res.send("helloder");
-            res.send((req.query.time).toString());
+            res.send(req.query.time);
     	});
         }
         findDocuments(db,function(){

@@ -45,7 +45,7 @@ app.get('/update', function (db, callback) {
         var updateDocuments = function(db, callback) {
         // Get the documents collection
         var collection = db.collection('bal1');
-        collection.update({'_id': num}, {$set: {'_id': (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()}}).toArray(function(err, docs) {
+        collection.updateDocuments({'_id': num}, {$set: {'_id': (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()}}).toArray(function(err, docs) {
             assert.equal(err, null);
             console.log("Found the following records");
             console.log(docs);
@@ -54,7 +54,7 @@ app.get('/update', function (db, callback) {
         });
         }
         updateDocuments(db,function(){
-        db.close(); 
+        db.close();
         });
     });
   callback.send(Message);

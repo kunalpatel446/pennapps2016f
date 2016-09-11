@@ -22,11 +22,11 @@ app.get('/read', function (req, res) {
     	collection.find({'_id': num}).toArray(function(err, docs) {
     	    assert.equal(err, null);
     	    console.log("Found the following records");
-    	    console.log(req.params.time);
+    	    console.log(req.params.tagId);
             Message = docs;
     	    callback(docs);
             //res.send("helloder");
-            res.send((req.params.time).toString());
+            res.send((req.params.tagId).toString());
     	});
         }
         findDocuments(db,function(){

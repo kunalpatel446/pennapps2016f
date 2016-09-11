@@ -15,7 +15,6 @@ app.get('/read/', function (req, res) {
     num = (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
-        console.log("Connection successful");
         var findDocuments = function(db, callback) {
     	// Get the documents collection
     	collection = db.collection('bal1');

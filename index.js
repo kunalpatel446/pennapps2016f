@@ -24,7 +24,7 @@ MongoClient.connect(url, function(err, db) {
 	});
     }
     findDocuments(db,function(){
-	db.close();cd 
+	db.close();
     });
 });
 

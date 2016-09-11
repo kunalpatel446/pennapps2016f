@@ -16,22 +16,23 @@ app.get('/read', function (req, res) {
     num = (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
-        //console.log("Connection successful");
+        console.log("Connection successful");
         var findDocuments = function(db, callback) {
     	// Get the documents collection
     	collection = db.collection('bal1');
     	collection.find({'_id': num}).toArray(function(err, docs) {
     	    assert.equal(err, null);
-    	    //console.log("Found the following records");
-    	    //console.log(docs);
+    	    console.log("Found the following records");
+    	    console.log(docs);
             Message = docs;
     	    callback(docs);
     	});
         }
         findDocuments(db,function(){
-    	   db.close(); 
+    	   db.close();
         });
     });
+    res.send("helloder");
   res.send(req.params.time);
 })
 

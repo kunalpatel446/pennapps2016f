@@ -11,7 +11,7 @@ var num;
 var url = 'mongodb://ec2-54-211-134-229.compute-1.amazonaws.com/penn_db';
 var Message;
 var collection;
-app.get('/read', function (req, res) {
+app.get('/read/?time=', function (req, res) {
     num = (Math.floor(Math.random() * (100000 - 1001 + 1)) + 1001).toString()
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
@@ -22,11 +22,11 @@ app.get('/read', function (req, res) {
     	collection.find({'_id': num}).toArray(function(err, docs) {
     	    assert.equal(err, null);
     	    console.log("Found the following records");
-    	    console.log(req.params.tagId);
+    	    console.log(req.query.time);
             Message = docs;
     	    callback(docs);
             //res.send("helloder");
-            res.send((req.params.tagId).toString());
+            res.send((req.query.time).toString());
     	});
         }
         findDocuments(db,function(){

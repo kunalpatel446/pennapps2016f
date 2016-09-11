@@ -12,11 +12,11 @@ var url = 'mongodb://ec2-54-211-134-229.compute-1.amazonaws.com';
 
 MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
-    console.log ("COnnection successful");
+    console.log ("Connection successful");
     var findDocuments = function(db, callback) {
 	// Get the documents collection
 	var collection = db.collection('bal1');
-	collection.find({'_id': 1003}).toArray(function(err, docs) {
+	collection.find().toArray(function(err, docs) {
 	    assert.equal(err, null);
 	    console.log("Found the following records");
 	    console.log(docs);
